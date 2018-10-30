@@ -91,6 +91,10 @@ export default {
         heightLight = 'rgba(200, 12, 42, 0.9)'
         afterColor = 'rgba(200, 12, 42, 0.3)'
         break
+      case 6:
+        heightLight = 'rgba(162, 251, 142, 0.9)'
+        afterColor = 'rgba(162, 251, 142, 0.3)'
+        break
     }
     state.nowPlayLrc.map((val, index) => {
       if (val[1].slice(0, 5) == util.sec_to_time(nowTime).slice(3, 8) && state.nowPlayLrc.length > 1) {
