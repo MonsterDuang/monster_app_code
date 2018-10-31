@@ -15,14 +15,16 @@ export default {
   // 存储歌曲url
   SAVE_SONG_MSG (state, data) {
     state.SongUrl = data
-    state.nowPlay = state.SongUrl[state.nowPlayId]
+    if (state.nowPlayList !== 6) {
+      state.nowPlay = state.SongUrl[state.nowPlayId]
+    }
   },
   // 存储歌曲lrc
   SAVE_SONG_LRC (state) {
     state.nowPlayLrc = []
     state.noLrc = false
     let songId = state.nowPlay.songinfo.song_id
-    let lrcUrl = api.song_id + 'song.lry&songid=' + songId
+    let lrcUrl = api.song_id + 'lry&songid=' + songId
     http.get(lrcUrl).then(res => {
       if (res.data.error_code) {
         state.noLrc = true
@@ -48,8 +50,8 @@ export default {
       }
     })
   },
-  SEARCH_TO_PLAY (state, data) {
-    state.nowPlay = data
+  SEARCH_TO_PLAY (state, index) {
+    state.nowPlay = state.SongUrl[index]
   },
   CHANGE_NEXT_SONG (state) {
     state.isPlaying = true

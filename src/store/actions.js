@@ -13,33 +13,31 @@ export default {
     let result = []
     for (let i in store.state.SongId) {
       let songId = store.state.SongId[i]
-      let url = api.song_id + songId
+      let url = api.song_id + 'play&songid=' + songId
       http.get(url).then(res => {
         result.push(res.data)
         store.commit('SAVE_SONG_MSG', result)
       }).then(res => {
         /* eslint-disable */
-        if (i == store.state.SongId.length - 1) {
+        if (i == store.state.SongId.length - 1 && store.state.nowPlayList !== 6) {
           store.commit('SAVE_SONG_LRC')
         }
       })
     }
   },
-  searchToPlay ({commit}, id) {
-    let url = api.song_id + id
-    http.get(url).then(res => {
-      commit('SEARCH_TO_PLAY', res.data)
-    }).then(res => {
-      store.commit('SAVE_SONG_LRC')
-    })
+  searchToPlay ({commit}, index) {
+    commit('SEARCH_TO_PLAY', index)
+    commit('SAVE_SONG_LRC')
   },
   // 下一首
   changeNextSong ({commit}) {
     commit('CHANGE_NEXT_SONG')
+    commit('SAVE_SONG_LRC')
   },
   // 上一首
   changeBeforeSong ({commit}) {
     commit('CHANGE_BEFORE_SONG')
+    commit('SAVE_SONG_LRC')
   },
   changePercent ({commit}, percent) {
     commit('CHANGE_PERCENT', percent)

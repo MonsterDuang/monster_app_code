@@ -2,11 +2,11 @@
   <div class="Info">
     <div class="top">
       <img src="../../assets/images/logo_.png" alt="">
-      <span>2.3.2</span>
+      <span>2.3.3</span>
     </div>
     <div class="findme">
       <span>微博: @爽朗的请叫我爱罗</span>
-      <span>GitHub: https://github.com/MonsterDuang</span>
+      <a href='https://github.com/MonsterDuang'>GitHub: https://github.com/MonsterDuang</a>
       <span>联系我们: monsterluo1119@yeah.net</span>
     </div>
   </div>
@@ -35,6 +35,9 @@
 }
 .findme{
   justify-content: space-around;
+}
+.findme a{
+  color: #fff;
 }
 .cancel{
   width: 100%;

@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="bottom-btn">
-      <a :href="nowPlay.bitrate.show_link">
+      <a :href="nowPlay.bitrate.show_link" :style="{color: textColor}">
         <i class="iconfont icon-download"></i>
       </a>
     </div>
@@ -37,6 +37,7 @@ export default {
     }
   },
   created () {
+    this.nowPlayLrc = []
     let playList = this.$route.query.play_list
     let Url = ''
     switch (playList) {

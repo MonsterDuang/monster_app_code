@@ -1,8 +1,8 @@
 <template>
   <div class="Search">
     <header>
-      <input type="text" @input="bindsearch" autofocus placeholder="歌手、歌曲名">
-      <router-link to="/searchsongplay" tag="span" class="isPlay" v-show="nowPlayList===6"><img src="../../assets/images/play.gif" alt=""></router-link>
+      <input type="text" @keyup="bindsearch" ref='search' autofocus placeholder="歌手、歌曲名">
+      <router-link :to="{path: '/songplay', query: {play_list: 6}}" tag="span" class="isPlay" v-show="nowPlayList === 6 && percent !== 0"><img src="../../assets/images/play.gif" alt=""></router-link>
     </header>
     <div class="empty" style="text-align: center" v-if="searchList.length === 0">
       <img src="../../assets/images/logo_.png" alt="">
@@ -11,7 +11,7 @@
       <p class="slogan">But the future is always color</p>
     </div>
     <div class="SongList" v-else>
-      <div class="song-list" v-for="(item,index) in searchList" :key="item.id" @click="searchToPlay(item)">
+      <div class="song-list" v-for="(item,index) in searchList" :key="item.id" @click="searchToPlay(index)">
         <p class="count">
           <span class="list-icon">{{index+1}}</span>
           </p>
@@ -36,24 +36,34 @@ export default {
       searchList: []
     }
   },
+  created () {
+    this.$store.commit('SEARCH_LIST')
+  },
   methods: {
     bindsearch (e) {
-      let url = api.search + e.target.value
-      http.get(url).then(res => {
-        this.searchList = res.data.song_list
-      }).then(res => {
-        this.$store.dispatch('getSongUrl')
-      })
+      if (e.keyCode === 13) {
+        let url = api.search + this.$refs.search.value
+        http.get(url).then(res => {
+          this.searchList = res.data.song_list
+          this.$store.commit('SAVE_SONG_ID', res.data.song_list)
+          this.$refs.search.blur()
+        }).then(res => {
+          this.$store.dispatch('getSongUrl')
+        }).then(res => {
+        })
+      }
     },
-    searchToPlay (item) {
-      let id = item.song_id
-      this.$store.dispatch('searchToPlay', id)
+    searchToPlay (index) {
+      this.$store.dispatch('searchToPlay', index)
       this.$router.push({path: '/songplay', query: {play_list: 6}})
     }
   },
   computed: {
     nowPlayList () {
       return this.$store.state.nowPlayList
+    },
+    percent () {
+      return this.$store.state.percent
     }
   }
 }
