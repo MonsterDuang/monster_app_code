@@ -30,10 +30,7 @@ export default {
   },
   methods: {
     audioEnd () {
-      if (this.$store.state.nowPlayList === 6) {
-      } else {
-        this.$store.dispatch('changeNextSong')
-      }
+      this.$store.dispatch('changeNextSong')
     },
     update (data) {
       let nowTime = data.target.currentTime
