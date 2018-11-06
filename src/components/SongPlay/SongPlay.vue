@@ -1,5 +1,6 @@
 <template>
   <v-touch class="Song" @pan="onPan" :style='{color: textColor, background: bgColor}'>
+    <Spin size="large" fix v-if="hasNowPlay"></Spin>
     <div class="play">
       <span class="btn-img">
         <i-circle :percent="percent" :stroke-width='2' :trail-width='2' :stroke-color='strokeColor' stroke-linecap="round" style="width:100%;height:110%">
@@ -78,6 +79,7 @@ export default {
     }
     if (this.nowPlayList !== playList && playList !== 6) {
       this.$store.dispatch('clearLrc')
+      this.$store.dispatch('changeSpin')
       let data = {url: Url, play_list: playList}
       this.$store.dispatch('getSong', data)
       .then(res => {
@@ -114,6 +116,9 @@ export default {
     },
     noLrc () {
       return this.$store.state.noLrc
+    },
+    hasNowPlay () {
+      return this.$store.state.hasNowPlay
     }
   },
   methods: {

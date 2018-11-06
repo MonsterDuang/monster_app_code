@@ -5,6 +5,9 @@ export default {
   clearLrc ({commit}) {
     commit('CLEAR_LRC')
   },
+  changeSpin ({commit}) {
+    commit('CHANGE_SPIN')
+  },
   // 获取歌曲信息
   getSong (store, data) {
     return http.get(data.url).then(res => {

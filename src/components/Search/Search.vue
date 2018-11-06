@@ -4,6 +4,7 @@
       <input type="text" @keyup="bindsearch" ref='search' autofocus placeholder="歌手、歌曲名">
       <router-link :to="{path: '/songplay', query: {play_list: 6}}" tag="span" class="isPlay" v-show="nowPlayList === 6 && percent !== 0"><img src="../../assets/images/play.gif" alt=""></router-link>
     </header>
+    <Spin size="large" fix v-if="searchBol"></Spin>
     <div class="empty" style="text-align: center" v-if="searchList.length === 0">
       <img src="../../assets/images/logo_.png" alt="">
       <p class="slogan">To me</p>
@@ -33,7 +34,7 @@ import api from '@/api'
 export default {
   data () {
     return {
-      searchList: []
+      searchBol: false
     }
   },
   created () {
@@ -42,11 +43,12 @@ export default {
   methods: {
     bindsearch (e) {
       if (e.keyCode === 13) {
+        this.searchBol = true
         let url = api.search + this.$refs.search.value
         http.get(url).then(res => {
-          this.searchList = res.data.song_list
           this.$store.commit('SAVE_SONG_ID', res.data.song_list)
           this.$refs.search.blur()
+          this.searchBol = false
         }).then(res => {
           this.$store.dispatch('getSongUrl')
         }).then(res => {
@@ -64,6 +66,9 @@ export default {
     },
     percent () {
       return this.$store.state.percent
+    },
+    searchList () {
+      return this.$store.state.searchList
     }
   }
 }

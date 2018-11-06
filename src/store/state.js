@@ -7,6 +7,8 @@ export default {
   nowPlayId: 0,
   // 当前播放曲目
   nowPlay: {},
+  hasNowPlay: true,
+  searchList: [],
   // 当前播放曲目歌词
   nowPlayLrc: [],
   noLrc: false,

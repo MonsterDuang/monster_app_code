@@ -6,8 +6,14 @@ export default {
   CLEAR_LRC (state) {
     state.nowPlayLrc = []
   },
+  CHANGE_SPIN (state) {
+    state.hasNowPlay = true
+  },
   // 存储歌曲id
   SAVE_SONG_ID (state, data) {
+    if (state.nowPlayList === 6) {
+      state.searchList = data
+    }
     let result = []
     for (var item of data) {
       result.push(item.song_id)
@@ -19,6 +25,7 @@ export default {
   // 存储歌曲url
   SAVE_SONG_MSG (state, data) {
     state.SongUrl = data
+    state.hasNowPlay = false
     if (state.nowPlayList !== 6) {
       state.nowPlay = state.SongUrl[state.nowPlayId]
     }
