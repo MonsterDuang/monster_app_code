@@ -37,7 +37,6 @@ export default {
     }
   },
   created () {
-    this.nowPlayLrc = []
     let playList = this.$route.query.play_list
     let Url = ''
     switch (playList) {
@@ -45,39 +44,40 @@ export default {
         this.strokeColor = '#a86a27'
         this.textColor = 'rgba(213, 132, 42, 0.5)'
         this.bgColor = 'rgba(213, 132, 42, 0.1)'
-        Url = api.new_song
+        Url = api.new_song + Math.round(Math.random() * 99)
         break
       case 2:
         this.strokeColor = '#188a3f'
         this.textColor = 'rgba(23, 173, 75, 0.5)'
         this.bgColor = 'rgba(23, 173, 75, 0.1)'
-        Url = api.hot_song
+        Url = api.hot_song + Math.round(Math.random() * 520)
         break
       case 3:
         this.strokeColor = '#281f72'
         this.textColor = 'rgba(45, 32, 142, 0.5)'
         this.bgColor = 'rgba(45, 32, 142, 0.1)'
-        Url = api.eus_song
+        Url = api.eus_song + Math.round(Math.random() * 99)
         break
       case 4:
         this.strokeColor = '#9d0fbc'
         this.textColor = 'rgba(200, 10, 242, 0.5)'
         this.bgColor = 'rgba(200, 10, 242, 0.1)'
-        Url = api.old_song
+        Url = api.old_song + Math.round(Math.random() * 65)
         break
       case 5:
         this.strokeColor = '#9d1027'
         this.textColor = 'rgba(200, 12, 42, 0.5)'
         this.bgColor = 'rgba(200, 12, 42, 0.1)'
-        Url = api.rock_song
+        Url = api.rock_song + Math.round(Math.random() * 89)
         break
       case 6:
-        this.strokeColor = '#2e5227'
-        this.textColor = 'rgba(162, 251, 142, 0.5)'
-        this.bgColor = 'rgba(162, 251, 142, 0.1)'
+        this.strokeColor = '#19b3b1'
+        this.textColor = 'rgba(25, 179, 177, 0.5)'
+        this.bgColor = 'rgba(25, 179, 177, 0.1)'
         break
     }
     if (this.nowPlayList !== playList && playList !== 6) {
+      this.$store.dispatch('clearLrc')
       let data = {url: Url, play_list: playList}
       this.$store.dispatch('getSong', data)
       .then(res => {
@@ -106,8 +106,11 @@ export default {
     nowPlayList () {
       return this.$store.state.nowPlayList
     },
-    nowPlayLrc () {
-      return this.$store.state.nowPlayLrc
+    nowPlayLrc: {
+      get () {
+        return this.$store.state.nowPlayLrc
+      },
+      set () {}
     },
     noLrc () {
       return this.$store.state.noLrc

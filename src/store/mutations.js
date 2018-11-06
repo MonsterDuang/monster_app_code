@@ -2,6 +2,10 @@ import http from 'axios'
 import api from '@/api'
 import util from '@/util'
 export default {
+  // 清空歌词
+  CLEAR_LRC (state) {
+    state.nowPlayLrc = []
+  },
   // 存储歌曲id
   SAVE_SONG_ID (state, data) {
     let result = []
@@ -50,8 +54,9 @@ export default {
       }
     })
   },
-  SEARCH_TO_PLAY (state, index) {
-    state.nowPlay = state.SongUrl[index]
+  SEARCH_TO_PLAY (state, res) {
+    state.nowPlay = res
+    state.SongUrl.unshift(res)
   },
   CHANGE_NEXT_SONG (state) {
     state.isPlaying = true
@@ -96,8 +101,8 @@ export default {
         afterColor = 'rgba(200, 12, 42, 0.3)'
         break
       case 6:
-        heightLight = 'rgba(162, 251, 142, 0.9)'
-        afterColor = 'rgba(162, 251, 142, 0.3)'
+        heightLight = 'rgba(25, 179, 177, 0.9)'
+        afterColor = 'rgba(25, 179, 177, 0.3)'
         break
     }
     state.nowPlayLrc.map((val, index) => {
@@ -111,8 +116,10 @@ export default {
           lrcScroll.scrollTop += lrcTop - (lrcContainerTop + lrcContainerHeight / 2)
         }
         if (index != 0) {
-          if (state.nowPlayLrc[index - 1][3] != '') {
-            state.nowPlayLrc[index - 1][3] = 'color: ' + afterColor
+          for (let i = 0; i < index; i++) {
+            if (state.nowPlayLrc[i][3] != 'color: ' + afterColor) {
+              state.nowPlayLrc[i][3] = 'color: ' + afterColor
+            }
           }
         }
       } 

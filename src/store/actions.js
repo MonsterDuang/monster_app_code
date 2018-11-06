@@ -1,6 +1,10 @@
 import http from 'axios'
 import api from '@/api'
 export default {
+  // 清空歌词
+  clearLrc ({commit}) {
+    commit('CLEAR_LRC')
+  },
   // 获取歌曲信息
   getSong (store, data) {
     return http.get(data.url).then(res => {
@@ -25,9 +29,13 @@ export default {
       })
     }
   },
-  searchToPlay ({commit}, index) {
-    commit('SEARCH_TO_PLAY', index)
-    commit('SAVE_SONG_LRC')
+  searchToPlay (store, songId) {
+    let url = api.song_id + 'play&songid=' + songId
+    http.get(url).then(res => {
+      store.commit('SEARCH_TO_PLAY', res.data)
+    }).then(res => {
+      store.commit('SAVE_SONG_LRC')
+    })
   },
   // 下一首
   changeNextSong ({commit}) {

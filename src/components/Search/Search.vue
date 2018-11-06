@@ -11,7 +11,7 @@
       <p class="slogan">But the future is always color</p>
     </div>
     <div class="SongList" v-else>
-      <div class="song-list" v-for="(item,index) in searchList" :key="item.id" @click="searchToPlay(index)">
+      <div class="song-list" v-for="(item,index) in searchList" :key="item.id" @click="searchToPlay(item.song_id)">
         <p class="count">
           <span class="list-icon">{{index+1}}</span>
           </p>
@@ -53,8 +53,8 @@ export default {
         })
       }
     },
-    searchToPlay (index) {
-      this.$store.dispatch('searchToPlay', index)
+    searchToPlay (songId) {
+      this.$store.dispatch('searchToPlay', songId)
       this.$router.push({path: '/songplay', query: {play_list: 6}})
     }
   },
