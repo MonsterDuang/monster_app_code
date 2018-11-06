@@ -84,6 +84,10 @@ export default {
       this.$store.dispatch('getSong', data)
       .then(res => {
         this.$store.dispatch('getSongUrl')
+      }).then(res => {
+        if (!this.isPlaying) {
+          this.$store.commit('CHANGE_IS_PLAYING_TRUE')
+        }
       })
     }
   },
