@@ -24,7 +24,7 @@
       <a :href="nowPlay.bitrate.show_link" :style="{color: textColor}">
         <i class="iconfont icon-download"></i>
       </a>
-      <Icon type="ios-barcode-outline" @click="showSongList"/>
+      <i class="iconfont icon-music_playlist" @click="showSongList"></i>
     </div>
     <Drawer :closable="false" v-model="songList" :styles="{color: textColor, background: bgColor, padding: '10px'}">
       <div class="items" v-for="(item, index) in SongUrl" :key="item.id" @click="toPlay(index)">
@@ -245,9 +245,6 @@ export default {
 }
 .bottom-btn i{
   height: 100%;
-  font-size: 3rem
-}
-.bottom-btn a i{
   font-size: 2rem;
 }
 .items{
