@@ -24,7 +24,14 @@
       <a :href="nowPlay.bitrate.show_link" :style="{color: textColor}">
         <i class="iconfont icon-download"></i>
       </a>
+      <Icon type="ios-barcode-outline" @click="showSongList"/>
     </div>
+    <Drawer :closable="false" v-model="songList" :styles="{color: textColor, background: bgColor, padding: '10px'}">
+      <div class="items" v-for="(item, index) in SongUrl" :key="item.id" @click="toPlay(index)">
+        <p class="list"><span v-if="nowPlayId==index"><img src="../../assets/images/play.gif" width="15px" height="15px" alt=""></span><span v-else>{{index+1}}. </span></p>
+        <p class="songInfo"><span>{{item.songinfo.title}}</span><span>{{item.songinfo.author}}</span></p>
+      </div>
+    </Drawer>
   </v-touch>
 </template>
 <script>
@@ -34,7 +41,8 @@ export default {
     return {
       strokeColor: '',
       textColor: '',
-      bgColor: ''
+      bgColor: '',
+      songList: false
     }
   },
   created () {
@@ -126,6 +134,12 @@ export default {
     },
     backHome () {
       return this.$store.state.backHome
+    },
+    SongUrl () {
+      return this.$store.state.SongUrl
+    },
+    nowPlayId () {
+      return this.$store.state.nowPlayId
     }
   },
   methods: {
@@ -145,6 +159,13 @@ export default {
       } else if (value.additionalEvent === 'panright' && value.isFinal === true) {
         this.$store.dispatch('changeBeforeSong')
       }
+    },
+    showSongList () {
+      this.songList = true
+    },
+    toPlay (index) {
+      this.songList = false
+      this.$store.dispatch('toPlay', index)
     }
   }
 }
@@ -215,17 +236,43 @@ export default {
 .bottom-btn{
   width: 100%;
   height: 5%;
-  text-align: center;
   position: absolute;
-  bottom: 2%
-}
-.bottom-btn span{
-  height: 80%;
-  display: inline-block
+  bottom: 2%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .bottom-btn i{
   height: 100%;
-  font-size: 2rem
+  font-size: 3rem
 }
-
+.bottom-btn a i{
+  font-size: 2rem;
+}
+.items{
+  font-size: 12px;
+  border-bottom: 1px solid #fff;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.items .songInfo{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column
+}
+.items .songInfo span{
+  font-size: 14px;
+  display: inline-block;
+  width: 100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+.items .songInfo span:last-of-type{
+  font-size: 12px
+}
 </style>

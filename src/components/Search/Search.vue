@@ -15,7 +15,7 @@
       <div class="song-list" v-for="(item,index) in searchList" :key="item.id" @click="searchToPlay(item.song_id)">
         <p class="count">
           <span class="list-icon">{{index+1}}</span>
-          </p>
+        </p>
         <div class="song-msg">
           <p class="song-name">
             {{item.title.split(/<.*?>/ig)[0]}}<b class="highlight">{{item.title.split(/<.*?>/ig)[1]}}</b>{{item.title.split(/<.*?>/ig)[2]}}
@@ -57,15 +57,14 @@ export default {
           }
         }).then(res => {
           this.$store.dispatch('getSongUrl')
-        }).then(res => {
-          if (!this.isPlaying) {
-            this.$store.commit('CHANGE_IS_PLAYING_TRUE')
-          }
         })
       }
     },
     searchToPlay (songId) {
       this.$store.dispatch('searchToPlay', songId)
+      if (!this.isPlaying) {
+        this.$store.commit('CHANGE_IS_PLAYING_TRUE')
+      }
       this.$router.push({path: '/songplay', query: {play_list: 6}})
     }
   },
@@ -78,6 +77,9 @@ export default {
     },
     searchList () {
       return this.$store.state.searchList
+    },
+    isPlaying () {
+      return this.$store.state.isPlaying
     }
   }
 }

@@ -56,6 +56,10 @@ export default {
   changeLrc ({commit}, nowTime) {
     commit('CHANGE_LRC', nowTime)
   },
+  toPlay ({commit}, index) {
+    commit('TO_PLAY', index)
+    commit('SAVE_SONG_LRC')
+  },
   login ({commit}, phone) {
     let url = api.db + 'user?phone=' + phone
     return http.get(url)

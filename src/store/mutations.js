@@ -138,6 +138,10 @@ export default {
   CHANGE_IS_PLAYING_FALSE (state) {
     state.isPlaying = false
   },
+  TO_PLAY (state, index) {
+    state.nowPlay = state.SongUrl[index]
+    state.nowPlayId = index
+  },
   SAVE_USERINFO (state, data) {
     state.userInfo = data
   },
