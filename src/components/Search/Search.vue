@@ -49,9 +49,18 @@ export default {
           this.$store.commit('SAVE_SONG_ID', res.data.song_list)
           this.$refs.search.blur()
           this.searchBol = false
+        }).catch(res => {
+          if (res) {
+            this.$msg('提示', '搜索失败或网络不佳')
+            this.$refs.search.blur()
+            this.searchBol = false
+          }
         }).then(res => {
           this.$store.dispatch('getSongUrl')
         }).then(res => {
+          if (!this.isPlaying) {
+            this.$store.commit('CHANGE_IS_PLAYING_TRUE')
+          }
         })
       }
     },

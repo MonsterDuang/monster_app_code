@@ -123,6 +123,9 @@ export default {
     },
     hasNowPlay () {
       return this.$store.state.hasNowPlay
+    },
+    backHome () {
+      return this.$store.state.backHome
     }
   },
   methods: {
