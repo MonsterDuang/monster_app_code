@@ -154,6 +154,7 @@ export default {
   border-top: solid 1px #ccc;
   padding: 1%;
   box-sizing: border-box;
+  user-select: none;  
   z-index: 10
 }
 .bgList p{
