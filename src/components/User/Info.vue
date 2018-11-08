@@ -5,8 +5,8 @@
       <span>2.3.3</span>
     </div>
     <div class="findme">
-      <a href='https://weibo.com/u/5116956676'>微博: @爽朗的请叫我爱罗</a>
-      <a href='https://github.com/MonsterDuang'>GitHub: https://github.com/MonsterDuang</a>
+      <router-link :to="{path: '/openurl', query: {url: 'https://weibo.com/u/5116956676', type: '1'}}">微博: @爽朗的请叫我爱罗</router-link>
+      <router-link :to="{path: '/openurl', query: {url: 'https://github.com/MonsterDuang', type: '2'}}">GitHub: https://github.com/MonsterDuang</router-link>
       <span>联系我们: monsterluo1119@yeah.net</span>
     </div>
   </div>

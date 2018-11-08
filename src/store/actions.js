@@ -40,6 +40,10 @@ export default {
       store.commit('SAVE_SONG_LRC')
     })
   },
+   // 切换背景
+  changeBg ({commit}, img) {
+    commit('CHANGE_IMG', img)
+  },
   // 下一首
   changeNextSong ({commit}) {
     commit('CHANGE_NEXT_SONG')

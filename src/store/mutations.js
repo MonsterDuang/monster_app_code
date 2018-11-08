@@ -9,6 +9,9 @@ export default {
   CHANGE_SPIN (state) {
     state.hasNowPlay = true
   },
+  clearNowPlayList (state) {
+    state.nowPlayList = 0
+  },
   // 存储歌曲id
   SAVE_SONG_ID (state, data) {
     if (state.nowPlayList === 6) {
@@ -62,7 +65,13 @@ export default {
     })
   },
   SEARCH_TO_PLAY (state, res) {
+    state.hasNowPlay = false
     state.nowPlay = res
+    for (let i in state.SongUrl) {
+      if (state.SongUrl[i].songinfo.song_id === state.nowPlay.songinfo.song_id) {
+        state.SongUrl.splice(i, 1)
+      }
+    }
     state.SongUrl.unshift(res)
   },
   CHANGE_NEXT_SONG (state) {
@@ -131,6 +140,9 @@ export default {
         }
       } 
     })
+  },
+  CHANGE_IMG (state, img) {
+    state.nowBackgroundUrl = img
   },
   CHANGE_IS_PLAYING_TRUE (state) {
     state.isPlaying = true

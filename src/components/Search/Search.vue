@@ -62,6 +62,7 @@ export default {
     },
     searchToPlay (songId) {
       this.$store.dispatch('searchToPlay', songId)
+      this.$store.dispatch('changeSpin')
       if (!this.isPlaying) {
         this.$store.commit('CHANGE_IS_PLAYING_TRUE')
       }

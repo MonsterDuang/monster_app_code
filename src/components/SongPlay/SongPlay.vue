@@ -21,10 +21,8 @@
       </div>
     </div>
     <div class="bottom-btn">
-      <a :href="nowPlay.bitrate.show_link" :style="{color: textColor}">
-        <i class="iconfont icon-download"></i>
-      </a>
-      <i class="iconfont icon-music_playlist" @click="showSongList"></i>
+      <i class="iconfont icon-LC_icon_reload_line" @click="reload" :class='{opacity: nowPlayList === 6}'></i>
+      <i class="iconfont icon-listview" @click="showSongList"></i>
     </div>
     <Drawer :closable="false" v-model="songList" :styles="{color: textColor, background: bgColor, padding: '10px'}">
       <div class="items" v-for="(item, index) in SongUrl" :key="item.id" @click="toPlay(index)">
@@ -86,17 +84,7 @@ export default {
         break
     }
     if (this.nowPlayList !== playList && playList !== 6) {
-      this.$store.dispatch('clearLrc')
-      this.$store.dispatch('changeSpin')
-      let data = {url: Url, play_list: playList}
-      this.$store.dispatch('getSong', data)
-      .then(res => {
-        this.$store.dispatch('getSongUrl')
-      }).then(res => {
-        if (!this.isPlaying) {
-          this.$store.commit('CHANGE_IS_PLAYING_TRUE')
-        }
-      })
+      this.getData(playList, Url)
     }
   },
   computed: {
@@ -143,6 +131,19 @@ export default {
     }
   },
   methods: {
+    getData (playList, Url) {
+      this.$store.dispatch('clearLrc')
+      this.$store.dispatch('changeSpin')
+      let data = {url: Url, play_list: playList}
+      this.$store.dispatch('getSong', data)
+      .then(res => {
+        this.$store.dispatch('getSongUrl')
+      }).then(res => {
+        if (!this.isPlaying) {
+          this.$store.commit('CHANGE_IS_PLAYING_TRUE')
+        }
+      })
+    },
     play () {
       if (!this.isPlaying) {
         this.$store.commit('CHANGE_IS_PLAYING_TRUE')
@@ -164,8 +165,16 @@ export default {
       this.songList = true
     },
     toPlay (index) {
+      if (!this.isPlaying) {
+        this.$store.commit('CHANGE_IS_PLAYING_TRUE')
+      }
       this.songList = false
       this.$store.dispatch('toPlay', index)
+    },
+    reload () {
+      if (this.nowPlayList !== 6) {
+        this.$router.replace('/replacepage')
+      }
     }
   }
 }
@@ -246,6 +255,12 @@ export default {
 .bottom-btn i{
   height: 100%;
   font-size: 2rem;
+}
+.bottom-btn i:last-of-type{
+  font-size: 2.1rem
+}
+.opacity{
+  opacity: 0.5;
 }
 .items{
   font-size: 12px;

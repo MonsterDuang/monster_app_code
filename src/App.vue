@@ -60,10 +60,10 @@ export default {
   overflow: hidden;
 }
 .animated-enter-active {
-  animation: slideInUp .5s
+  animation: slideInUp .3s
 }
 .animated-leave-active {
-  animation: fadeOut .5s
+  animation: fadeOut .3s
 }
 .neight{
   width: 100%;
