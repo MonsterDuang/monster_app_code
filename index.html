@@ -50,7 +50,7 @@
     // 获取可视窗口的实际高度 宽度
     let h = document.documentElement.clientHeight
     masked.style.display = 'block'
-    let timer = setInterval(show, 10)
+    let timer = setInterval(show, 8)
     const k = 1.5
     function show () {
       bgList.style.bottom = parseInt(bgSty.bottom) + k + 'px'
@@ -69,7 +69,7 @@
     // 获取可视窗口的实际高度 宽度
     let h = document.documentElement.clientHeight
     maskedH.style.display = 'none'
-    let timer = setInterval(hide, 10)
+    let timer = setInterval(hide, 8)
     const n = -3
     function hide () {
       bgListH.style.bottom = parseInt(bgStyH.bottom) + n + 'px'
