@@ -41,10 +41,10 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 0 0.625rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .header i{
-    font-size: 2rem
+    font-size: 1.5rem
   }
   .weibo{
     width: 100%;
