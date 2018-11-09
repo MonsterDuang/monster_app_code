@@ -10,12 +10,13 @@
 <script>
 export default {
   created () {
+    document.querySelector('.masked').style.display = 'none'
     this.img = this.$route.query.img
   },
   methods: {
     changeBg (img) {
       this.$store.dispatch('changeBg', img)
-      this.$router.push('/home')
+      this.$router.go(-1)
     }
   }
 }

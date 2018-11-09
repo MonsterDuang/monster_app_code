@@ -5,6 +5,7 @@
     </transition>
     <audio :src="nowPlay.bitrate.show_link" ref="audio" @ended="audioEnd" @timeupdate='update' autoplay></audio>
     <div :class="{neight:isNeight}"></div>
+    <div class="masked"></div>
   </div>
 </template>
 <script>
@@ -72,5 +73,15 @@ export default {
   top: 0;
   background: rgba(0, 0, 0, .6);
   z-index: -1;
+}
+.masked{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  display: none;
+  z-index: 9
 }
 </style>

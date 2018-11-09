@@ -19,7 +19,6 @@
       </router-link>
       <span class="bottom-btn-link" @click="changeNowPlayList"><img src="../../assets/images/heart_tiny.png" alt="" :class="{'animated fadeOut infinite':this.nowPlayList===7}"></span>
     </div>
-    <div class="masked"></div>
     <div class="bgList" ref="bglist">
       <p><span>powered by</span> Monster</p>
       <ul class="img-container">
@@ -134,16 +133,6 @@ export default {
 }
 .bottom-btn-link img{
   height: 100%;
-}
-.masked{
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: .5;
-  position: absolute;
-  top: 0;
-  display: none;
-  z-index: 10
 }
 .bgList{
   width: 100%;
