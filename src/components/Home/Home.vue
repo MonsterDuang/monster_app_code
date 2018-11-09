@@ -21,7 +21,7 @@
     </div>
     <div class="masked"></div>
     <div class="bgList" ref="bglist">
-      <p><span>powered &nbsp;by</span> Monster</p>
+      <p><span>powered by</span> Monster</p>
       <ul class="img-container">
         <router-link :to="{'path':'/bgimage',query:{'img':item.img}}" tag="li" v-for="(item) in backgroundImg" :key="item.id"><img :src="item.img" alt=""></router-link>
       </ul>

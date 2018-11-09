@@ -1,10 +1,10 @@
 <template>
   <div class="openurl">
-    <span class="header" @click="$router.go(-1)" v-show="this.type == 2">
+    <span class="header" @click="$router.go(-1)" v-if="this.type == 2">
       <i class="iconfont icon-back"></i>&nbsp;返回
     </span>
-    <iframe frameborder=0 :src="Url" class="weibo" v-show="this.type == 1"></iframe>
-    <div class="github" v-show="this.type == 2">
+    <iframe frameborder=0 :src="Url" class="weibo" v-if="this.type == 1"></iframe>
+    <div class="github" v-if="this.type == 2">
       <img src="../../assets/images/logo.png" width="60%" alt="">
       <span>由于GitHub网站限制,请复制链接到浏览器打开.</span>
       <span class="url">{{Url}}</span>
@@ -52,7 +52,7 @@ export default {
   }
   .github{
     width: 100%;
-    height: 65%;
+    height: 94%;
     display: flex;
     flex-direction: column;
     justify-content: center;
