@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="lrc">
-      <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length == 1, 'lrc_scroll': !noLrc}">
+      <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length < 15, 'one_item': nowPlayLrc.length == 1 && nowPlayLrc[0][2].length > 410, 'lrc_scroll': !noLrc}">
         <div v-if='!noLrc' v-for="(item, index) in nowPlayLrc" :key="index" :style="item[3]" :id="item[1]" class="lrc_item">{{item[2]}}</div>
         <div v-if='noLrc'>emmmmm，歌词走丢了~</div>
       </div>
@@ -227,7 +227,8 @@ export default {
   font-size: 14px;
   display: flex;
   align-items: center;
-  flex-direction: column
+  flex-direction: column;
+  padding: 0 1.5rem
 }
 .nolrc_scroll{
   width: 100%;
@@ -237,7 +238,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column
+  flex-direction: column;
+  padding: 0 1.5rem
+}
+.one_item{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-size: 14px;
+  display: inline-block;
+  padding: 0 1.5rem
 }
 .lrc_item{
   text-align: center
