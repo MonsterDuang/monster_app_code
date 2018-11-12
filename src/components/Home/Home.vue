@@ -103,6 +103,7 @@ export default {
   height: 45%;
   position: absolute;
   right: 3%;
+  top: 2%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
