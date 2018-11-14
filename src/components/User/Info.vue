@@ -8,7 +8,7 @@
       <router-link :to="{path: '/openurl', query: {url: 'https://weibo.com/u/5116956676', type: '1'}}">微博: @爽朗的请叫我爱罗</router-link>
       <router-link :to="{path: '/openurl', query: {url: 'https://github.com/MonsterDuang', type: '2'}}">GitHub: https://github.com/MonsterDuang</router-link>
       <span>联系我们: monsterluo1119@yeah.net</span>
-      <img src="../../../static/qrcode.png" alt="">
+      <img src="../../assets/images/qrcode.png" alt="">
     </div>
   </div>
 </template>
