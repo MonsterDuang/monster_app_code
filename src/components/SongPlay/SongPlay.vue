@@ -158,7 +158,6 @@ export default {
       }
     },
     onPan (value) {
-      console.log(value)
       if (value.additionalEvent === 'panleft' && value.isFinal === true && value.deltaX < -100) {
         this.$store.dispatch('changeNextSong')
       } else if (value.additionalEvent === 'panright' && value.isFinal === true && value.deltaX > 100) {
