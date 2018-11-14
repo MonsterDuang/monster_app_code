@@ -16,7 +16,10 @@
     </div>
     <div class="lrc">
       <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length < 15, 'one_item': nowPlayLrc.length == 1 && nowPlayLrc[0][2].length > 410, 'lrc_scroll': !noLrc}">
-        <div v-if='!noLrc' v-for="(item, index) in nowPlayLrc" :key="index" :style="item[3]" :id="item[1]" class="lrc_item">{{item[2]}}</div>
+        <div v-if='!noLrc' v-for="(item, index) in nowPlayLrc" :key="index" :style="item[3]" :id="item[1]" class="lrc_item">
+          <span v-if="item[1]">{{item[2]}}</span>
+          <pre v-else style="white-space: pre-wrap"><span>{{item[2]}}</span></pre>
+          </div>
         <div v-if='noLrc'>emmmmm，歌词走丢了~</div>
       </div>
     </div>

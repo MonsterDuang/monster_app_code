@@ -59,6 +59,9 @@ export default {
           let Lrc = lrc.split()
           Lrc.unshift('')
           Lrc.unshift('')
+          if (Lrc[2].length > 100) {
+            Lrc[2] = '*该歌词不支持自动滚动*\n' + Lrc[2]
+          }
           state.nowPlayLrc[0] = Lrc
         }
       }
