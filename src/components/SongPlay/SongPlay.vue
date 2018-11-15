@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="lrc">
-      <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length < 15, 'one_item': nowPlayLrc.length == 1 && nowPlayLrc[0][2].length > 410, 'lrc_scroll': !noLrc}">
+      <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length < 15, 'one_item': nowPlayLrc.length == 1 && nowPlayLrc[0][2].length > 100, 'lrc_scroll': !noLrc}">
         <div v-if='!noLrc' v-for="(item, index) in nowPlayLrc" :key="index" :style="item[3]" :id="item[1]" class="lrc_item">
           <pre v-if="item[1]" style="white-space: pre-wrap">{{item[2]}}</pre>
           <pre v-else style="white-space: pre-wrap">{{item[2]}}</pre>
