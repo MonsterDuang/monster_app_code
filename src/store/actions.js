@@ -5,6 +5,9 @@ export default {
   clearLrc ({commit}) {
     commit('CLEAR_LRC')
   },
+  clearNoLrc ({commit}) {
+    commit('CLEAR_NO_LRC')
+  },
   changeSpin (store) {
     store.commit('CHANGE_SPIN')
   },

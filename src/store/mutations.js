@@ -6,6 +6,9 @@ export default {
   CLEAR_LRC (state) {
     state.nowPlayLrc = []
   },
+  CLEAR_NO_LRC (state) {
+    state.noLrc = '歌词加载中...'
+  },
   CHANGE_SPIN (state) {
     state.hasNowPlay = true
   },
@@ -36,13 +39,14 @@ export default {
   // 存储歌曲lrc
   SAVE_SONG_LRC (state) {
     state.nowPlayLrc = []
-    state.noLrc = false
+    state.noLrc = '歌词加载中...'
     let songId = state.nowPlay.songinfo.song_id
     let lrcUrl = api.song_id + 'lry&songid=' + songId
     http.get(lrcUrl).then(res => {
       if (res.data.error_code) {
-        state.noLrc = true
+        state.noLrc = 'emmmmm，歌词走丢了~'
       } else {
+        state.noLrc = ''
         let lrc = res.data.lrcContent
         if (lrc.indexOf('[') > -1) {
           lrc = lrc.split(/\n/)
@@ -65,6 +69,8 @@ export default {
           state.nowPlayLrc[0] = Lrc
         }
       }
+    }).catch(res => {
+      state.noLrc = '歌词加载失败~'
     })
   },
   SEARCH_TO_PLAY (state, res) {

@@ -8,16 +8,57 @@
       <router-link :to="{path: '/openurl', query: {url: 'https://weibo.com/u/5116956676', type: '1'}}">微博: @爽朗的请叫我爱罗</router-link>
       <router-link :to="{path: '/openurl', query: {url: 'https://github.com/MonsterDuang', type: '2'}}">GitHub: https://github.com/MonsterDuang</router-link>
       <span>联系我们: monsterluo1119@yeah.net</span>
-      <img src="../../assets/images/qrcode.png" alt="">
+      <img @click="showQrcodeFn" src="../../assets/images/qrcode.png" alt="">
+    </div>
+    <div class="showQrcode animated fadeInUp" id="showContainer" v-show='showQrcode' @click="hideQrcodeFn">
+      <a @click="noHide" href='https://github.com/MonsterDuang/monster_app/raw/master/unpackage/androidAPK/Monster.apk'><img src="../../assets/images/qrcode.png" alt=""></a>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      showQrcode: false
+    }
+  },
+  methods: {
+    showQrcodeFn () {
+      this.showQrcode = true
+    },
+    hideQrcodeFn () {
+      this.showQrcode = false
+    },
+    noHide (e) {
+      e.stopPropagation()
+    }
+  }
+}
+</script>
+
 <style scoped>
 .Info{
   width: 100%;
   height: 100%;
   position: relative;
   background: #151b16
+}
+.showQrcode{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: rgba(0,0,0,.9);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.showQrcode a{
+  width: 80%;
+}
+.showQrcode a img{
+  width: 100%;
 }
 .top, .findme{
   width: 100%;

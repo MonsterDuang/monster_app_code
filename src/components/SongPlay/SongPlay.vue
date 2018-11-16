@@ -17,10 +17,10 @@
     <div class="lrc">
       <div class="lrc_scroll" id="lrc_scroll" :class="{'nolrc_scroll': noLrc || nowPlayLrc.length < 15, 'one_item': nowPlayLrc.length == 1 && nowPlayLrc[0][2].length > 100, 'lrc_scroll': !noLrc}">
         <div v-if='!noLrc' v-for="(item, index) in nowPlayLrc" :key="index" :style="item[3]" :id="item[1]" class="lrc_item">
-          <pre v-if="item[1]" style="white-space: pre-wrap">{{item[2]}}</pre>
-          <pre v-else style="white-space: pre-wrap">{{item[2]}}</pre>
+          <pre v-if="item[1]" style="white-space: pre-wrap">{{item[2].replace(/(^\s*)|(\s*$)/g, "")}}</pre>
+          <pre v-else style="white-space: pre-wrap">{{item[2].replace(/(^\s*)|(\s*$)/g, "")}}</pre>
         </div>
-        <div v-if='noLrc'>emmmmm，歌词走丢了~</div>
+        <div v-if='noLrc'>{{noLrc}}</div>
       </div>
     </div>
     <div class="bottom-btn">
@@ -136,6 +136,7 @@ export default {
   methods: {
     getData (playList, Url) {
       this.$store.dispatch('clearLrc')
+      this.$store.dispatch('clearNoLrc')
       this.$store.dispatch('changeSpin')
       let data = {url: Url, play_list: playList}
       this.$store.dispatch('getSong', data)

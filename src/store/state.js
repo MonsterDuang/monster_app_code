@@ -11,7 +11,7 @@ export default {
   searchList: [],
   // 当前播放曲目歌词
   nowPlayLrc: [],
-  noLrc: false,
+  noLrc: '歌词加载中...',
   // 当前播放列表
   nowPlayList: 0,
   // 播放状态
