@@ -1,13 +1,18 @@
 <template>
   <div class="openurl">
-    <span class="header" @click="$router.go(-1)" v-if="this.type == 2">
+    <span class="header" @click="$router.go(-1)" v-if="this.type == 2 || this.type == 3">
       <i class="iconfont icon-back"></i>&nbsp;返回
     </span>
     <iframe frameborder=0 :src="Url" class="weibo" v-if="this.type == 1"></iframe>
+    <iframe frameborder=0 :src="Url" class="app_downloda" v-if="this.type == 3"></iframe>
     <div class="github" v-if="this.type == 2">
       <img src="../../assets/images/logo.png" width="60%" alt="">
       <span>由于GitHub网站限制,请复制链接到浏览器打开.</span>
       <span class="url">{{Url}}</span>
+    </div>
+    <div class="showQrcode" v-if="this.type == 3">
+      <span>下载新版本</span>
+      <img src="../../assets/images/logo.png" width="60%" alt="">
     </div>
   </div>
 </template>
@@ -59,6 +64,12 @@ export default {
     align-items: center;
     color: #000;
   }
+  .app_downloda{
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+  }
   .github span{
     margin-bottom: 15px;
   }
@@ -71,4 +82,17 @@ export default {
     color: #0b9;
     font-weight: bold
   }
+  .showQrcode{
+  width: 100%;
+  height: 94%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column
+}
+.showQrcode span{
+ color: #000;
+ font-size: 28px
+}
 </style>

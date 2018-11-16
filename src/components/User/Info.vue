@@ -11,7 +11,7 @@
       <img @click="showQrcodeFn" src="../../assets/images/qrcode.png" alt="">
     </div>
     <div class="showQrcode animated fadeInUp" id="showContainer" v-show='showQrcode' @click="hideQrcodeFn">
-      <a @click="noHide" href='https://github.com/MonsterDuang/monster_app/raw/master/unpackage/androidAPK/Monster.apk'><img src="../../assets/images/qrcode.png" alt=""></a>
+      <router-link @click="noHide" :to="{path: '/openurl', query: {url: 'https://github.com/MonsterDuang/monster_app/raw/master/unpackage/androidAPK/Monster.apk', type: '3'}}"><img src="../../assets/images/qrcode.png" alt=""></router-link>
     </div>
   </div>
 </template>
