@@ -6,6 +6,9 @@
     <audio :src="nowPlay.bitrate.show_link" ref="audio" @ended="audioEnd" @timeupdate='update' autoplay></audio>
     <div :class="{neight:isNeight}"></div>
     <div class="masked"></div>
+    <div class="close" v-if="$route.path != '/home'" @click="$router.push('/home')">
+      <img src="./assets/images/x.png" alt="">
+    </div>
   </div>
 </template>
 <script>
@@ -83,5 +86,15 @@ export default {
   top: 0;
   display: none;
   z-index: 9
+}
+.close{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10
+}
+.close img{
+  width: 30px;
+  height: 30px;
 }
 </style>
